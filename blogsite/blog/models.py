@@ -17,7 +17,7 @@ class User(models.Model):
     birthday = models.DateField()
     date_registration = models.DateField(auto_now_add=True)
     country = models.CharField(max_length=50)
-    avatar_path = models.ImageField(upload_to='blog-site/blogsite/media')
+    avatar_path = models.ImageField(upload_to='blog-site/blogsite/media', null=True)
     id_auth = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
 
     def __str__(self):

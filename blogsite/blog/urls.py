@@ -4,5 +4,5 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', home_view, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

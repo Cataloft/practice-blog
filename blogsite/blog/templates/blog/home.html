@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>v0</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div style="border: 2px solid #000;" >
+        <h1>Body</h1>
+        <p>That should be in the body</p>
+        {for post in post}
+            {{post}}
+        {endfor}
+    </div>
+
+{% endblock content %}
