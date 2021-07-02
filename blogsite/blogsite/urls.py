@@ -21,11 +21,20 @@ from django.urls import path, include
 from blog.views import (
     home_view,
 )
-
+from account.views import (
+    registration_view,
+    logout_view,
+    login_view,
+    account_view,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view),
+    path('', home_view, name="home"),
+    path('register/', registration_view, name="register"),
+    path('logout/', logout_view, name="logout"),
+    path('login/', login_view, name="login"),
+    path('account/', account_view, name="account"),
 ]
 
 # REST

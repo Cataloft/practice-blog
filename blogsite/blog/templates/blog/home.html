@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
     <div style="border: 2px solid #000;" >
-        <h1>Body</h1>
-        <p>That should be in the body</p>
-        {for post in post}
-            {{post}}
-        {endfor}
+        <h3 style="text-align: center; color: orange">Blog</h3>
+        {% for post in posts %}
+            <h3>{{post.title}}</h3>
+            <p>{{post.body}}</p>
+            <small>{{post.likes}} likes</small>
+        {% endfor %}
+
     </div>
 
 {% endblock content %}

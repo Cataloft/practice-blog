@@ -2,23 +2,31 @@
 <html lang="en">
 
 <head>
-    <div style="border: 2px solid #000;">
-       <h1>Header</h1>
-    </div>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'snippets/header.html' %}
 
 </head>
 <body>
+    <!-- Body -->
+    <style type="text/css">
+        .main{
+            min-height: 100vh;
+            height: 100%;
+        }
+    </style>
+    <div class="main">
+        {% block content %}
 
-{% block content %}
-
-{% endblock content %}
-
-</body>
-
-<footer>
-    <div style="border: 2px solid #000;">
-        <h2>Footer</h2>
+        {% endblock content %}
     </div>
 
-</footer>
+    <!-- End Body -->
+
+    {% include 'snippets/footer.html' %}
+</body>
+
+
 </html>

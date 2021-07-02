@@ -1,33 +1,12 @@
 from django.db import models
-
-
-class AuthUser(models.Model):
-    login = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.login
-
-
-class User(models.Model):
-    name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-    middlename = models.CharField(max_length=50, null=True)
-    birthday = models.DateField()
-    date_registration = models.DateField(auto_now_add=True)
-    country = models.CharField(max_length=50)
-    avatar_path = models.ImageField(upload_to='blog-site/blogsite/media', null=True)
-    id_auth = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
+from account.models import Account
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
     body = models.TextField()
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(Account, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
     likes = models.IntegerField()
@@ -38,7 +17,7 @@ class Post(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=50)
-    enabled = models.BooleanField()
+    enabled = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -47,17 +26,14 @@ class Role(models.Model):
 class RoleUser(models.Model):
     class Meta:
         unique_together = (('id_role', 'id_user'),)
-    id_role = models.IntegerField(primary_key=True)
-    id_user = models.IntegerField()
-
-    def __str__(self):
-        return self.id_role
+    id_role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(Account, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     body = models.TextField()
     date = models.DateField(auto_now_add=True)
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.body
@@ -66,11 +42,8 @@ class Comment(models.Model):
 class CommentPost(models.Model):
     class Meta:
         unique_together = (('id_comment', 'id_post'),)
-    id_comment = models.IntegerField(primary_key=True)
-    id_post = models.IntegerField()
-
-    def __str__(self):
-        return self.id_comment
+    id_comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 
 class Photo(models.Model):
@@ -94,11 +67,8 @@ class Category(models.Model):
 class CategoryPost(models.Model):
     class Meta:
         unique_together = (('id_category', 'id_post'),)
-    id_category = models.IntegerField(primary_key=True)
-    id_post = models.IntegerField()
-
-    def __str__(self):
-        return self.id_category
+    id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 
 class Tag(models.Model):
@@ -111,8 +81,6 @@ class Tag(models.Model):
 class TagPost(models.Model):
     class Meta:
         unique_together = (('id_tag', 'id_post'),)
-    id_tag = models.IntegerField(primary_key=True)
-    id_post = models.IntegerField()
+    id_tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.id_tag
