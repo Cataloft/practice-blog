@@ -20,20 +20,24 @@ from django.urls import path, include
 
 from blog.views import (
     home_view,
+    create_blog_view,
 )
 from account.views import (
     registration_view,
     logout_view,
     login_view,
     account_view,
+    must_authenticate_view,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name="home"),
+    path('blog/', include('blog.urls', 'blog')),
     path('register/', registration_view, name="register"),
     path('logout/', logout_view, name="logout"),
     path('login/', login_view, name="login"),
+    path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('account/', account_view, name="account"),
 ]
 
