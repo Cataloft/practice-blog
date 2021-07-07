@@ -3,7 +3,9 @@ from operator import attrgetter
 from blog.models import *
 from account.models import Account
 from blog.forms import CreatePostForm, UpdatePostForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
 
 
 def home_view(request):
@@ -83,3 +85,6 @@ def edit_blog_view(request, slug):
     )
     context['form'] = form
     return render(request, 'blog/edit_blog.html', context)
+
+
+

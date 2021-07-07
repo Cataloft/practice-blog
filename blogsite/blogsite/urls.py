@@ -20,7 +20,6 @@ from django.urls import path, include
 
 from blog.views import (
     home_view,
-    create_blog_view,
 )
 from account.views import (
     registration_view,
@@ -28,6 +27,7 @@ from account.views import (
     login_view,
     account_view,
     must_authenticate_view,
+    delete_post_view,
 )
 
 urlpatterns = [
@@ -39,10 +39,16 @@ urlpatterns = [
     path('login/', login_view, name="login"),
     path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
     path('account/', account_view, name="account"),
+    path('account/<post_id>', delete_post_view, name='delete'),
+
+
+    # REST
+    path('api/blog/', include('blog.api.urls', 'blog_api')),
+
 ]
 
-# REST
-# path('api/blog', include(blog.api.urls, 'blog-api'))
+
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

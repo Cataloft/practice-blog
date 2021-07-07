@@ -28,3 +28,4 @@ class UpdatePostForm(forms.ModelForm):
         if commit:
             blog_post.save()
         return blog_post
+

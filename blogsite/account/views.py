@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
+from django.http import HttpResponse
 from .models import Account
 from blog.models import Post
 
@@ -71,7 +72,7 @@ def account_view(request):
             context['success_message'] = "Updated"
     else:
         form = AccountUpdateForm(
-            initial= {
+            initial={
                 "email": request.user.email,
                 "username": request.user.username,
             }
@@ -85,3 +86,9 @@ def account_view(request):
 
 def must_authenticate_view(request):
     return render(request, 'account/must_authenticate.html', {})
+
+
+def delete_post_view(request, post_id=None):
+    post_to_delete = Post.objects.get(id=post_id)
+    post_to_delete.delete()
+    return HttpResponse('Post deleted')
