@@ -43,7 +43,7 @@ urlpatterns = [
 
 
     # REST
-    path('api/blog/', include('blog.api.urls', 'blog_api')),
+    #path('api/blog/', include('blog.api.urls', 'blog_api')),
 
 ]
 
