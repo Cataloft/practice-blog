@@ -91,4 +91,4 @@ def must_authenticate_view(request):
 def delete_post_view(request, post_id=None):
     post_to_delete = Post.objects.get(id=post_id)
     post_to_delete.delete()
-    return HttpResponse('Post deleted')
+    return redirect('account')

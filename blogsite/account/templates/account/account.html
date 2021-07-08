@@ -34,7 +34,7 @@
     text-align: center;
   }
   .blog_posts{
-    max-width: 500px;
+    max-width: 550px;
     width: 100%;
     margin: auto;
   }
@@ -78,9 +78,9 @@
         <ul>
           {% for post in blog_posts %}
             <a href="{% url 'blog:detail' post.slug %}" style="text-decoration: none">
-              <li class="list-group-item">{{post}}</li>
+              <li class="list-group-item">{{post}}<a href="{% url 'delete' post.id %}" class="btn btn-sm btn-danger p-1 m-1">Delete</a></li>
+
             </a>
-            <a href="{% url 'delete' post.id %}">Delete</a>
 
           {% endfor %}
         </ul>
