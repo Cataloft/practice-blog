@@ -34,7 +34,7 @@ def create_blog_view(request):
         return redirect('must_authenticate')
 
     form = CreatePostForm(request.POST or None, request.FILES or None)
-    if form.is_valid:
+    if form.is_valid():
         obj = form.save(commit=False)
         author = Account.objects.filter(email=request.user.email).first()
         obj.author = author

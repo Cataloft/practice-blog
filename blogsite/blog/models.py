@@ -17,7 +17,7 @@ def upload_location(instance, filename, **kwargs):
 class Post(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     body = models.TextField(max_length=5000, null=False, blank=False)
-    image = models.ImageField(upload_to=upload_location, null=True, blank=False)
+    image = models.ImageField(upload_to=upload_location, null=True, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)

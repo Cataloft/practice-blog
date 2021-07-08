@@ -1,6 +1,6 @@
 from django.urls import path
 
-from blog.api.view import api_detail_post_view
+from blog.api.view import *
 
 app_name = 'blog'
 
