@@ -44,6 +44,13 @@ urlpatterns = [
 
     # REST
     #path('api/blog/', include('blog.api.urls', 'blog_api')),
+<<<<<<< HEAD
+=======
+
+]
+
+
+>>>>>>> 8a2f235a4fb1d67053941939e3639f51bad393dc
 
 
 ]
